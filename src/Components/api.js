@@ -1,11 +1,11 @@
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
-import ShortUniqueId from "short-unique-id";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+//file and directory names
 const __filename = fileURLToPath(import.meta.url); //add for it to work for for ES Modules
 const __dirname = path.dirname(__filename);
 
@@ -13,14 +13,17 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
-//
+
+//create path to employee.json
 const employeesFilePath = path.join(__dirname, "../data/employees.json");
 
+//assign data from file to variable, parse into json format 
 function readEmployeesFromFile() {
   const data = fs.readFileSync(employeesFilePath, "utf8");
   return JSON.parse(data).employees;
 }
 
+//add in the functionality to increase ID number each time when adding a new one
 function getNextId(employees) {
   if (employees.length === 0) {
     return "001";
@@ -32,6 +35,7 @@ function getNextId(employees) {
   return (maxId + 1).toString().padStart(3, "0");
 }
 
+//edit and add to files by writing to them 
 function writeEmployeesToFile(employees) {
   fs.writeFileSync(employeesFilePath, JSON.stringify({ employees }, null, 2));
 }
@@ -53,9 +57,7 @@ app.get("/directory", (req, res) => {
 // POST request to add new employee
 app.post("/directory", (req, res) => {
   const newEmployee = req.body.newEmployee || req.body;
-
-  console.log("Received body:", req.body);
-
+  //checks if object is defined and not empty, if either not met logs error
   if (!newEmployee || Object.keys(newEmployee).length === 0) {
     console.log("Error: Invalid or missing employee data");
     return res.status(400).json({
@@ -67,17 +69,15 @@ app.post("/directory", (req, res) => {
 
   const employees = readEmployeesFromFile();
   const nextId = getNextId(employees);
-  console.log("Generated next ID:", nextId); // Add this line for debugging
 
   const addNewEmployee = {
     id: nextId,
     ...newEmployee,
   };
 
+  //add employee to file
   employees.push(addNewEmployee);
   writeEmployeesToFile(employees);
-
-  console.log("New employee added:", addNewEmployee); // Add this line for debugging
 
   res.status(201).json({
     success: true,
@@ -147,26 +147,7 @@ app.delete("/directory/:id", (req, res) => {
   });
 });
 
-// PORT
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-function normalizeEmployeeIds() {
-  const employees = readEmployeesFromFile();
-  let nextId = 1;
-  const normalizedEmployees = employees.map((employee) => {
-    const id = nextId.toString().padStart(3, "0");
-    nextId++;
-    return {
-      ...employee,
-      id: id,
-    };
-  });
-  writeEmployeesToFile(normalizedEmployees);
-  console.log("Employee IDs have been normalized.");
-}
-
-// Call this function once to normalize your existing data
-// normalizeEmployeeIds();

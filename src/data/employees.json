@@ -3,7 +3,7 @@
     {
       "id": "003",
       "name": "Carol White",
-      "department": "Sales",
+      "department": "HR",
       "location": "Chicago",
       "email": "carol.white@example.com"
     },
@@ -41,13 +41,6 @@
       "department": "Legal",
       "location": "Denver",
       "email": "hank.miller@example.com"
-    },
-    {
-      "id": "009",
-      "name": "John Green",
-      "department": "Marketing",
-      "location": "London",
-      "email": "John.Green@example.com"
     }
   ]
 }

@@ -5,8 +5,8 @@ function App() {
 
   return (
     <>
+    <h1>Company Directory</h1>
     <Table />
-
     </>
   )
 }
