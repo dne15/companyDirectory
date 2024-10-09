@@ -1,0 +1,53 @@
+{
+  "employees": [
+    {
+      "id": "003",
+      "name": "Carol White",
+      "department": "Sales",
+      "location": "Chicago",
+      "email": "carol.white@example.com"
+    },
+    {
+      "id": "004",
+      "name": "David Brown",
+      "department": "HR",
+      "location": "Los Angeles",
+      "email": "david.brown@example.com"
+    },
+    {
+      "id": "005",
+      "name": "Eve Davis",
+      "department": "Finance",
+      "location": "Boston",
+      "email": "eve.davis@example.com"
+    },
+    {
+      "id": "006",
+      "name": "Frank Wilson",
+      "department": "IT",
+      "location": "Seattle",
+      "email": "frank.wilson@example.com"
+    },
+    {
+      "id": "007",
+      "name": "Grace Lee",
+      "department": "Customer Support",
+      "location": "Austin",
+      "email": "grace.lee@example.com"
+    },
+    {
+      "id": "008",
+      "name": "Hank Miller",
+      "department": "Legal",
+      "location": "Denver",
+      "email": "hank.miller@example.com"
+    },
+    {
+      "id": "009",
+      "name": "John Green",
+      "department": "Marketing",
+      "location": "London",
+      "email": "John.Green@example.com"
+    }
+  ]
+}
